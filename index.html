@@ -162,7 +162,7 @@
                     throw new Error('Erro ao buscar dados da ficha.');
                 }
                 const data = await response.json();
-                const data_pericias = await response.json();
+                const data_pericias = await response_pericia.json();
 
                 // Preencher os dados na página
                 const fichaContainer = document.getElementById('ficha');
