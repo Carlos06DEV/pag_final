@@ -156,38 +156,18 @@
         // Função para buscar os dados da API
         async function fetchFicha() {
           try {
-              const response = await fetch('https://34ff-177-115-19-133.ngrok-free.app/fichas/ultima', {
-                headers: {
-                  'ngrok-skip-browser-warning': 'true'  // Adicionando o cabeçalho aqui
-                }
-              });
-              
-              const response_pericia = await fetch('https://34ff-177-115-19-133.ngrok-free.app/pericias/ultima', {
-                headers: {
-                  'ngrok-skip-browser-warning': 'true'  // Adicionando o cabeçalho aqui
-                }
-});
-              
-              // Verificando se as respostas são válidas (status 200 OK)
+              const response = await fetch('http://127.0.0.1:5000/fichas/ultima');
+              const response_pericia = await fetch('http://127.0.0.1:5000/pericias/ultima');
+  
               if (!response.ok || !response_pericia.ok) {
                   throw new Error('Erro ao buscar dados da ficha ou perícias.');
               }
-      
-              // Verificando se a resposta é JSON
-              const contentTypeFicha = response.headers.get("Content-Type");
-              const contentTypePericia = response_pericia.headers.get("Content-Type");
-      
-              if (!contentTypeFicha.includes("application/json") || !contentTypePericia.includes("application/json")) {
-                  throw new Error("A resposta não é um JSON válido.");
-              }
-      
-              // Convertendo a resposta para JSON
+
               const data = await response.json();
               const data_pericias = await response_pericia.json();
-      
-              // Preencher os dados na página
+              console.log(data)
               const fichaContainer = document.getElementById('ficha');
-              fichaContainer.innerHTML = `
+              fichaContainer.innerHTML = ` 
                   <h2>${data.nome}</h2>
                   <div class="attribute"><span>Classe:</span> ${data.classe}</div>
                   <div class="attribute"><span>Raça:</span> ${data.raca}</div>
@@ -218,8 +198,9 @@
           }
       }
 
-        // Chamar a função ao carregar a página
-        window.onload = fetchFicha;
+      window.onload = fetchFicha;
     </script>
+</body>
+</html>
 </body>
 </html>
