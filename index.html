@@ -156,8 +156,8 @@
         // Função para buscar os dados da API
         async function fetchFicha() {
           try {
-              const response = await fetch('https://d5ae-177-115-19-133.ngrok-free.app/fichas/ultima');
-              const response_pericia = await fetch('https://d5ae-177-115-19-133.ngrok-free.app/pericias/ultima');
+              const response = await fetch('https://34ff-177-115-19-133.ngrok-free.app/fichas/ultima');
+              const response_pericia = await fetch('https://34ff-177-115-19-133.ngrok-free.app/pericias/ultima');
               
               if (!response.ok || !response_pericia.ok) {
                   throw new Error('Erro ao buscar dados da ficha ou perícias.');
