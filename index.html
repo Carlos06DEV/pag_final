@@ -155,65 +155,40 @@
     <script>
         // Função para buscar os dados da API
         async function fetchFicha() {
-          try {
-              const response = await fetch('https://34ff-177-115-19-133.ngrok-free.app/fichas/ultima');
-              const response_pericia = await fetch('https://34ff-177-115-19-133.ngrok-free.app/pericias/ultima');
-              
-              if (!response.ok || !response_pericia.ok) {
-                  throw new Error('Erro ao buscar dados da ficha ou perícias.');
-              }
-      
-              // Verificando o conteúdo da resposta antes de tentar convertê-la para JSON
-              const textFicha = await response.text();
-              const textPericia = await response_pericia.text();
-      
-              console.log('Resposta Ficha:', textFicha);  // Ver conteúdo bruto
-              console.log('Resposta Perícia:', textPericia);  // Ver conteúdo bruto
-      
-              const contentTypeFicha = response.headers.get("Content-Type");
-              const contentTypePericia = response_pericia.headers.get("Content-Type");
-      
-              if (!contentTypeFicha.includes("application/json") || !contentTypePericia.includes("application/json")) {
-                  throw new Error("A resposta não é um JSON válido.");
-              }
-      
-              // Convertendo para JSON
-              const data = JSON.parse(textFicha);
-              const data_pericias = JSON.parse(textPericia);
-      
-              // Preencher os dados na página
-              const fichaContainer = document.getElementById('ficha');
-              fichaContainer.innerHTML = `
-                  <h2>${data.nome}</h2>
-                  <div class="attribute"><span>Classe:</span> ${data.classe}</div>
-                  <div class="attribute"><span>Raça:</span> ${data.raca}</div>
-                  <div class="attribute"><span>Idade:</span> ${data.idade}</div>
-                  <div class="attribute"><span>Sexo:</span> ${data.sexo}</div>
-                  <div class="attribute"><span>HP:</span> ${data.Hp}</div>
-                  <div class="attribute"><span>CA:</span> ${data.ca}</div>
-                  <div class="attribute"><span>DVida:</span> ${data.DVida}</div>
-                  <div class="attribute"><span>Iniciativa:</span> ${data.iniciativa}</div>
-                  <div class="attribute"><span>Sanidade:</span> ${data.sanidade}</div>
-                  <div class="attribute"><span>Força:</span> ${data.forca}</div>
-                  <div class="attribute"><span>Destreza:</span> ${data.destreza}</div>
-                  <div class="attribute"><span>Inteligência:</span> ${data.inteligencia}</div>
-                  <div class="attribute"><span>Constituição:</span> ${data.constituicao}</div>
-                  <div class="attribute"><span>Sabedoria:</span> ${data.sabedoria}</div>
-                  <div class="attribute"><span>Carisma:</span> ${data.carisma}</div>
-                  <div class="attribute"><span>Magia:</span> ${data.magia}</div>
-                  <div class="attribute"><span>Pericia 1:</span> ${data_pericias.pericia_1}</div>
-                  <div class="attribute"><span>Pericia 2:</span> ${data_pericias.pericia_2}</div>
-                  <div class="attribute"><span>Pericia 3:</span> ${data_pericias.pericia_3}</div>
-                  <div class="attribute"><span>Pericia 4:</span> ${data_pericias.pericia_4}</div>
-                  <div class="attribute"><span>Pericia 5:</span> ${data_pericias.pericia_5}</div>
-                  <div class="attribute"><span>Pericia 6:</span> ${data_pericias.pericia_6}</div>
-              `;
-          } catch (error) {
-              console.error(error);
-              document.getElementById('ficha').innerHTML = `<h2>Erro ao carregar ficha.</h2>`;
-          }
-      }
+            try {
+                // Substitua a URL abaixo pela sua API
+                const response = await fetch('https://34ff-177-115-19-133.ngrok-free.app');
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar dados da ficha.');
+                }
+                const data = await response.json();
 
+                // Preencher os dados na página
+                const fichaContainer = document.getElementById('ficha');
+                fichaContainer.innerHTML = `
+                    <h2>${data.nome}</h2>
+                    <div class="attribute"><span>Classe:</span> ${data.classe}</div>
+                    <div class="attribute"><span>Raça:</span> ${data.raca}</div>
+                    <div class="attribute"><span>Idade:</span> ${data.idade}</div>
+                    <div class="attribute"><span>Sexo:</span> ${data.sexo}</div>
+                    <div class="attribute"><span>HP:</span> ${data.Hp}</div>
+                    <div class="attribute"><span>CA:</span> ${data.ca}</div>
+                    <div class="attribute"><span>DVida:</span> ${data.DVida}</div>
+                    <div class="attribute"><span>Iniciativa:</span> ${data.iniciativa}</div>
+                    <div class="attribute"><span>Sanidade:</span> ${data.sanidade}</div>
+                    <div class="attribute"><span>Força:</span> ${data.forca}</div>
+                    <div class="attribute"><span>Destreza:</span> ${data.destreza}</div>
+                    <div class="attribute"><span>Inteligência:</span> ${data.inteligencia}</div>
+                    <div class="attribute"><span>Constituição:</span> ${data.constituicao}</div>
+                    <div class="attribute"><span>Sabedoria:</span> ${data.sabedoria}</div>
+                    <div class="attribute"><span>Carisma:</span> ${data.carisma}</div>
+                    <div class="attribute"><span>Magia:</span> ${data.magia}</div>
+                `;
+            } catch (error) {
+                console.error(error);
+                document.getElementById('ficha').innerHTML = `<h2>Erro ao carregar ficha.</h2>`;
+            }
+        }
 
         // Chamar a função ao carregar a página
         window.onload = fetchFicha;
