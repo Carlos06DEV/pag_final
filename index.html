@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ficha de Personagem Dark</title>
+  <style>
+        body {
+        background: 
+            url('https://img.freepik.com/free-photo/old-brown-paper-texture-background_1373-431.jpg') no-repeat center center/cover,
+            linear-gradient(to bottom, #1a0f0b 0%, #2c1a12 100%);
+        color: #3e3029;
+        font-family: 'MedievalSharp', cursive;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+        min-height: 100vh;
+        }
+
+        header {
+        text-align: center;
+        padding: 30px;
+        background: url('https://www.transparenttextures.com/patterns/old-map.png');
+        border-bottom: 3px solid #5e3c2a;
+        position: relative;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        header h1 {
+        font-size: 2.8em;
+        margin: 0;
+        color: #5e3c2a;
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+        letter-spacing: 3px;
+        position: relative;
+        display: inline-block;
+        padding: 0 20px;
+        }
+
+        header h1::before,
+        header h1::after {
+        content: '✠';
+        position: absolute;
+        font-size: 1.2em;
+        color: #8b5a3c;
+        }
+
+        header h1::before { left: -200px; }
+        header h1::after { right: -200px; }
+
+        .container {
+        padding: 30px;
+        max-width: 900px;
+        margin: 40px auto;
+        background: url('https://www.transparenttextures.com/patterns/old-paper.png');
+        border-radius: 8px;
+        box-shadow: 
+            0 0 20px rgba(94, 60, 42, 0.3),
+            inset 0 0 30px rgba(94, 60, 42, 0.2);
+        border: 1px solid #6d4c3a;
+        position: relative;
+        }
+
+        .card {
+        background: url('https://www.transparenttextures.com/patterns/cardboard.png');
+        border: 2px solid #6d4c3a;
+        border-radius: 5px;
+        padding: 25px;
+        margin-bottom: 25px;
+        position: relative;
+        transition: transform 0.3s ease;
+        box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .card:hover {
+        transform: rotate(0.5deg) translateY(-3px);
+        box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h2 {
+        font-size: 1.8em;
+        margin-bottom: 15px;
+        color: #5e3c2a;
+        border-bottom: 2px dashed #8b5a3c;
+        padding-bottom: 8px;
+        text-transform: uppercase;
+        }
+
+        .attribute {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        margin: 12px 0;
+        background: rgba(139, 90, 60, 0.1);
+        border: 1px solid #8b5a3c;
+        border-radius: 3px;
+        font-size: 1.1em;
+        position: relative;
+        }
+
+        .attribute span:last-child {
+        font-family: 'Cinzel', serif;
+        color: #3e1f13;
+        font-weight: bold;
+        font-size: 1.2em;
+        }
+
+        .seal {
+        position: absolute;
+        width: 60px;
+        opacity: 0.8;
+        right: -30px;
+        top: -30px;
+        transform: rotate(15deg);
+        }
+
+        footer {
+        text-align: center;
+        padding: 20px;
+        background: url('https://www.transparenttextures.com/patterns/old-map.png');
+        border-top: 3px solid #5e3c2a;
+        color: #5e3c2a;
+        font-family: 'Cinzel', serif;
+        letter-spacing: 1px;
+        }
+
+    </style>
+</head>
+<body>
+  <header>
+    <h1>Ficha de Personagem</h1>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h2>Informações Básicas</h2>
+      <div class="attribute"><span>Nome:</span> <span id="nome"></span></div>
+      <div class="attribute"><span>Idade:</span> <span id="idade"></span></div>
+      <div class="attribute"><span>Sexo:</span> <span id="sexo"></span></div>
+      <div class="attribute"><span>Classe:</span> <span id="classe"></span></div>
+      <div class="attribute"><span>Raça:</span> <span id="raca"></span></div>
+    </div>
+
+    <div class="card">
+      <h2>Atributos</h2>
+      <div class="attribute"><span>Força:</span> <span id="forca"></span></div>
+      <div class="attribute"><span>Destreza:</span> <span id="destreza"></span></div>
+      <div class="attribute"><span>Inteligência:</span> <span id="inteligencia"></span></div>
+      <div class="attribute"><span>Constituição:</span> <span id="constituicao"></span></div>
+      <div class="attribute"><span>Sabedoria:</span> <span id="sabedoria"></span></div>
+      <div class="attribute"><span>Carisma:</span> <span id="carisma"></span></div>
+    </div>
+
+    <div class="card">
+      <h2>Magia e Perícias</h2>
+      <div class="attribute"><span>Magia:</span> <span id="magia"></span></div>
+      <div class="attribute"><span>Perícias:</span> <span id="pericias"></span></div>
+    </div>
+  </div>
+
+  <script>
+    let nome = localStorage.getItem('nome');
+    let idade = localStorage.getItem('idade');
+    let sexo = localStorage.getItem('sexo');
+    let classe = localStorage.getItem('classe');
+    let raca = localStorage.getItem('raca');
+
+    let forca = localStorage.getItem('forca');
+    let destreza = localStorage.getItem('destreza');
+    let inteligencia = localStorage.getItem('inteligencia');
+    let constituicao = localStorage.getItem('constituicao');
+    let sabedoria = localStorage.getItem('sabedoria');
+    let carisma = localStorage.getItem('carisma')
+      
+    let magia = localStorage.getItem('magia');
+    let pericias = JSON.parse(localStorage.getItem('pericias'));
+
+    document.getElementById('nome').textContent = nome || 'Desconhecido';
+    document.getElementById('idade').textContent = idade || 'N/A';
+    document.getElementById('sexo').textContent = sexo || 'N/A';
+    document.getElementById('classe').textContent = classe || 'N/A';
+    document.getElementById('raca').textContent = raca || 'N/A';
+    
+    document.getElementById('forca').textContent = forca || 'N/A';
+    document.getElementById('destreza').textContent = destreza || 'N/A';
+    document.getElementById('inteligencia').textContent = inteligencia || 'N/A';
+    document.getElementById('constituicao').textContent = constituicao || 'N/A';
+    document.getElementById('sabedoria').textContent = sabedoria || 'N/A';
+    document.getElementById('carisma').textContent = carisma || 'N/A';
+    
+    document.getElementById('magia').textContent = magia || 'Nenhuma';
+    document.getElementById('pericias').textContent = pericias ? pericias.join(', ') : 'Nenhuma';
+  </script>
+</body>
+
+</html>
